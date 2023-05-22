@@ -9,17 +9,38 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "18.16.3",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.1.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.0",
+    "@prisma/client": "^4.13.0",
     "autoprefixer": "10.4.14",
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.0.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.0",
     "next": "13.3.2",
+    "next-auth": "^4.22.1",
+    "nookies": "^2.5.2",
     "postcss": "8.4.23",
+    "prisma": "^4.13.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
+    "swr": "^2.1.5",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express-session": "^1.17.7",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "18.16.3",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.1"
   }
 }

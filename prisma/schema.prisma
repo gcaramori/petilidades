@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  password String
+  birth DateTime
+  gender String
+  cpf String
+  telephone String
+  active Boolean
+  createdAt DateTime @default(now())
+}
+
+model UserShipment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user_id String
+  street String
+  district String
+  cep String
+  city String
+  country String
+  complement String
+  cpf String
+  createdAt DateTime @default(now())
+}
+
+model Products {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  sku String @unique
+  images Json
+  price Float
+  list_price Float
+  boleto_price Float
+  quantity Int
+  category String
+  discount Int
+  extra Json
+  visits Int
+  createdAt DateTime @default(now())
+}
+
+model Categories {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  keywords String[]
+  images Json
+  createdAt DateTime @default(now())
+}

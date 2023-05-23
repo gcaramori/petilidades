@@ -7,39 +7,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import UserDropdown from "./userDropdown"
 import Tooltip from "../shared/tooltip"
-// import { parseCookies, setCookie, destroyCookie } from 'nookies';
-
-interface IUser {
-    email: string;
-    name: string;
-    localization: string;
-}
+import { useSession } from "next-auth/react"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Navbar() {
-    const [user, setUser] = useState<IUser>({ email: '', name: '', localization: '' })
+    const { data: session } = useSession()
+    
     const [isUserOpen, setIsUserOpen] = useState<boolean>(false)
-
-    // useEffect(() => {
-    //     const cookies = parseCookies()
-        
-        // if(cookies.user) destroyCookie(null, 'user')
-        // if(!cookies.user) {
-        //     const user = {
-        //         email: 'gcaramori16@gmail.com',
-        //         name: 'Guilherme',
-        //         localization: 'Brazil',
-        //     }
-
-        //     setCookie(null, 'user', JSON.stringify(user), {
-        //         maxAge: 30 * 24 * 60 * 60,
-        //         path: '/',
-        //     })
-        // }
-        
-        // setUser(JSON.parse(cookies.user))
-    // }, [])
 
     function handleUserButton() {
         setIsUserOpen((isUserOpen) => !isUserOpen)
@@ -88,7 +63,7 @@ export default function Navbar() {
 
                     <div className="flex justify-center items-center">
                         {
-                            user?.email ? 
+                            session?.user?.email ? 
                                 <UserDropdown /> 
                             : (
                                 <Tooltip text="Fazer login ou cadastrar-se">

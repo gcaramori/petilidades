@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient, User } from '@prisma/client'
 import { compare } from 'bcryptjs'
-import { sign } from 'jsonwebtoken'
 
 const prisma = new PrismaClient()
 
@@ -24,14 +23,12 @@ export default async function handler(
             return
         }
 
-        if(!compare(password, user.password)) {
+        if(!(await compare(password, user.password))) {
             res.status(400).json({ message: "A senha está incorreta!" })
 
             return
         }
 
-        const accessToken = sign(email, password)
-
-        res.status(200).json({ email, password, accessToken })
+        res.status(200).json(user)
     }
 }

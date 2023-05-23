@@ -1,13 +1,16 @@
 import Link from "next/link"
 import PersonIcon from '@mui/icons-material/Person';
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import { signOut } from "next-auth/react"
 
 export default function UserDropdown() {
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false)
 
-  const handleUserButton = () => {
-    setShowDropdown((showDropdown) => !showDropdown);
-  };
+  const handleUserButton = useCallback(() => {
+    setShowDropdown((showDropdown) => {
+        return (showDropdown) ? false : true
+    });
+  }, [])
 
   return (
     <div className="relative block w-auto">
@@ -23,6 +26,16 @@ export default function UserDropdown() {
                         <Link className="block w-full h-full py-3 px-8 focus:outline-none focus:border-0" href="/">
                             Minha conta
                         </Link>
+                    </li>
+                    <li className="block text-center h-auto w-auto transition-all bg-gray-100 hover:bg-gray-200">
+                        <Link className="block w-full h-full py-3 px-8 focus:outline-none focus:border-0" href="/pedidos">
+                            Meus pedidos
+                        </Link>
+                    </li>
+                    <li className="block text-center h-auto w-auto transition-all bg-gray-100 hover:bg-gray-200">
+                        <button className="block w-full h-full py-3 px-8 border-0 appearance-none z-50 focus:outline-none focus:border-0" onClick={() => signOut()}>
+                            Sair
+                        </button>
                     </li>
                 </ul>  
             )

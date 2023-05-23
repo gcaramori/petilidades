@@ -1,4 +1,3 @@
-import { signIn } from "next-auth/react"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -30,7 +29,7 @@ export default function RegisterForm() {
         formState: { errors },
     } = useForm({
         resolver: zodResolver(registerSchema)
-    });
+    })
 
     return (
         <div className="relative block w-[700px] h-[650px]">
@@ -44,7 +43,7 @@ export default function RegisterForm() {
                 </span>
             </div>
 
-            <form className="flex flex-col justify-start items-center gap-16 h-full w-full relative" onSubmit={handleSubmit((d) => console.log(d))}>
+            <form className="flex flex-col justify-start items-center gap-16 h-full w-full relative" onSubmit={handleSubmit((loginData) => console.log(loginData))}>
                 <div className="form-row w-full flex justify-center items-center gap-6 relative">
                     <div className="block w-1/2 relative">
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>

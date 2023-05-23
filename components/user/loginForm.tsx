@@ -1,27 +1,37 @@
-import { signIn } from "next-auth/react"
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-
-interface ILoginUser {
-    email: string;
-    password: string;
-}
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import { signIn } from 'next-auth/react'
 
 const loginSchema = z.object({
     email: z.string().min(8, { message: 'Digite o email, por favor!' }),
     password: z.string().min(1)
 })
 
-export default function LoginForm() {
+export default function LoginForm({ openModal }: any) {
+    const router = useRouter()
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(loginSchema)
-    });
+    })
 
+    const login = async (loginData: any) => {
+        const signInResponse = await signIn('credentials', { ...loginData, redirect: false })
+        
+        if(signInResponse?.error) {
+            openModal()
+            
+            return
+        }
+
+        router.push('/')
+    }
+    
     return (
         <div className="relative block w-[500px] h-[650px]">
             <div className="flex flex-col justify-start items-center relative gap-4 mb-24">
@@ -34,7 +44,7 @@ export default function LoginForm() {
                 </span>
             </div>
 
-            <form className="flex flex-col justify-start items-center gap-12 h-full w-full relative" onSubmit={handleSubmit((d) => console.log(d))}>
+            <form className="flex flex-col justify-start items-center gap-12 h-full w-full relative" onSubmit={handleSubmit(loginData => login(loginData))}>
                 <div className="block w-full relative">
                     <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>
                     <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: teste@gmail.com" />

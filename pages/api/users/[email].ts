@@ -6,7 +6,7 @@ type UserWhereUniqueInput = Prisma.UserWhereUniqueInput
 
 const prisma = new PrismaClient()
 
-export default async function handler(
+export async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {

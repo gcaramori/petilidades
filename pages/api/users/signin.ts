@@ -4,7 +4,7 @@ import { compare } from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
-export default async function handler(
+export async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

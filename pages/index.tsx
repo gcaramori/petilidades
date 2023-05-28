@@ -11,7 +11,7 @@ export default function Home(ref: IndexPageRef) {
     <PageTransition ref={ref}>
       <Navbar />
 
-      <main className={`flex h-full flex-col items-center justify-between p-24 ${inter.className} overflow-hidden`}>
+      <main className={`flex h-screen flex-col items-center justify-between p-24 ${inter.className} overflow-hidden`}>
         
       </main>
     </PageTransition>

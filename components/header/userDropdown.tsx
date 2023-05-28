@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import { signOut } from "next-auth/react"
 
 export default function UserDropdown() {
-  const [showDropdown, setShowDropdown] = useState(false)
+  const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   const handleUserButton = useCallback(() => {
     setShowDropdown((showDropdown) => {

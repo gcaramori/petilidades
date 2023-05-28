@@ -18,17 +18,22 @@
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^5.0.0",
+    "cookie": "^0.5.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
     "express-session": "^1.17.3",
+    "framer-motion": "^10.12.16",
     "jsonwebtoken": "^9.0.0",
     "next": "13.3.2",
     "next-auth": "^4.22.1",
+    "nodemailer": "^6.9.2",
+    "nookies": "^2.5.2",
     "postcss": "8.4.23",
     "prisma": "^4.13.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-input-mask": "^2.0.4",
     "swr": "^2.1.5",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
@@ -36,10 +41,13 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookie": "^0.5.1",
     "@types/express-session": "^1.17.7",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "18.16.3",
+    "@types/nodemailer": "^6.4.8",
     "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1"
+    "@types/react-dom": "18.2.1",
+    "@types/react-input-mask": "^3.0.2"
   }
 }

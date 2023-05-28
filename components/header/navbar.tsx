@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Image from "next/image"
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
@@ -13,12 +12,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Navbar() {
     const { data: session } = useSession()
-    
-    const [isUserOpen, setIsUserOpen] = useState<boolean>(false)
-
-    function handleUserButton() {
-        setIsUserOpen((isUserOpen) => !isUserOpen)
-    }
 
     return (
         <header className={`flex w-full py-6 px-10 bg-main ${inter.className}`}>
@@ -67,7 +60,7 @@ export default function Navbar() {
                                 <UserDropdown /> 
                             : (
                                 <Tooltip text="Fazer login ou cadastrar-se">
-                                    <Link href="/auth/login" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black" onClick={handleUserButton}>
+                                    <Link href="/auth/login" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black">
                                         <PersonIcon fontSize="small" />
                                     </Link>
                                 </Tooltip>

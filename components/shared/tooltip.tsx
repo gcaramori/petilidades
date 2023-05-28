@@ -6,7 +6,7 @@ interface TooltipProps {
 }
 
 const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   const handleMouseEnter = () => {
     setShowTooltip(true)

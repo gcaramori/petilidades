@@ -1,16 +1,8 @@
-import { useForm } from 'react-hook-form'
+import { useForm, Controller, FieldValues } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-
-interface IRegisterUser {
-    email: string;
-    password: string;
-    name: string;
-    birth: string;
-    gender: string;
-    cpf: string;
-    phone: string;
-}
+import InputMask from 'react-input-mask'
+import { useRouter } from 'next/router'
 
 const registerSchema = z.object({
     email: z.string().min(8, { message: 'Digite o email, por favor!' }).regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, { message: 'Digite o email corretamente, por favor!' }),
@@ -19,11 +11,14 @@ const registerSchema = z.object({
     birth: z.coerce.date(),
     gender: z.string().min(1, { message: 'Escolha o gênero, por favor!' }),
     cpf: z.string().min(8, { message: 'Digite o CPF, por favor!' }).regex(/^(?!(\d)\1{10}$)(\d{3})(\.\d{3}){2}-\d{2}$/, { message: 'Digite o CPF corretamente, por favor!' }),
-    phone: z.string().min(8, { message: 'Digite o celular, por favor!' }).regex(/^\(?\d{2}\)?[\s-]?\d{5}-?\d{4}$/, { message: 'Digite o celular corretamente, por favor!' })
+    telephone: z.string().min(8, { message: 'Digite o celular, por favor!' }).regex(/^\(?\d{2}\)?[\s-]?\d{5}-?\d{4}$/, { message: 'Digite o celular corretamente, por favor!' })
 })
 
 export default function RegisterForm() {
+    const router = useRouter()
+
     const {
+        control,
         register,
         handleSubmit,
         formState: { errors },
@@ -31,8 +26,39 @@ export default function RegisterForm() {
         resolver: zodResolver(registerSchema)
     })
 
+    const registerUser = async (registerData : FieldValues) => {
+        const newUser = await fetch('/api/users', {
+            method: 'POST',
+            body: JSON.stringify({
+                ...registerData,
+                active: false
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+
+        console.log(newUser)
+
+        if(!newUser) return false
+
+        const sendActivationEmail = await fetch('/api/register/success', {
+            method: 'POST',
+            body: JSON.stringify({ email: registerData?.email }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        if(!sendActivationEmail) return false
+
+        router.push('/register/success')
+
+        return true
+    }
+
     return (
-        <div className="relative block w-[700px] h-[650px]">
+        <div className="relative block w-[700px] h-[750px]">
             <div className="flex flex-col justify-start items-center relative gap-4 mb-24">
                 <h1 className="block text-4xl text-black font-bold drop-shadow-md text-left">
                     Ainda não é cliente?
@@ -43,7 +69,7 @@ export default function RegisterForm() {
                 </span>
             </div>
 
-            <form className="flex flex-col justify-start items-center gap-16 h-full w-full relative" onSubmit={handleSubmit((loginData) => console.log(loginData))}>
+            <form className="flex flex-col justify-start items-center gap-16 h-full w-full relative" onSubmit={handleSubmit((registerData) => registerUser(registerData))}>
                 <div className="form-row w-full flex justify-center items-center gap-6 relative">
                     <div className="block w-1/2 relative">
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>
@@ -82,29 +108,103 @@ export default function RegisterForm() {
 
                     <div className="block w-1/2 relative">
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">CPF</label>
-                        <input type="text" {...register('cpf')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: 188.678.455-0" />
+                        <Controller
+                            name="cpf"
+                            control={control}
+                            render={({ 
+                                field: {
+                                    onChange,
+                                    onBlur,
+                                    name,
+                                    ref
+                                }
+                            }) => (
+                                <InputMask
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    inputRef={ref}
+                                    name={name}
+                                    mask="999.999.999-99"
+                                    placeholder="Ex: 123.456.789-0"
+                                    className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none"
+                                />
+                            )}
+                        />
                         {
                             errors.cpf &&
                             <p className="block absolute top-20 inset-x-0 text-md font-semibold text-red-600 text-center">
-                                {errors.cpf?.message?.toString()}
+                                Digite seu CPF corretamente, por favor!
                             </p>
                         }
                     </div>
                 </div>
 
                 <div className="form-row w-full flex justify-center items-center gap-6 relative">
-                    <div className="block w-1/2 relative">
-                        <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Celular</label>
-                        <input type="text" {...register('phone')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: (19) 98503-2392" />
+                    <div className="block w-1/3 relative">
+                        <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Data de nascimento</label>
+                        <Controller
+                            name="birth"
+                            control={control}
+                            render={({ 
+                                field: {
+                                    onChange,
+                                    onBlur,
+                                    name,
+                                    ref
+                                }
+                            }) => (
+                                <InputMask
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    inputRef={ref}
+                                    name={name}
+                                    mask="99/99/9999"
+                                    placeholder="Ex: 10/02/1998"
+                                    className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none"
+                                />
+                            )}
+                        />
                         {
-                            errors.phone &&
+                            errors.birth &&
                             <p className="block absolute top-20 inset-x-0 text-md font-semibold text-red-600 text-center">
-                                {errors.phone?.message?.toString()}
+                                Digite a data de nascimento corretamente, por favor!
                             </p>
                         }
                     </div>
 
-                    <div className="block w-1/2 relative">
+                    <div className="block w-1/3 relative">
+                        <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Celular</label>
+                        <Controller
+                            name="telephone"
+                            control={control}
+                            render={({ 
+                                field: {
+                                    onChange,
+                                    onBlur,
+                                    name,
+                                    ref
+                                }
+                            }) => (
+                                <InputMask
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                    inputRef={ref}
+                                    name={name}
+                                    mask="(99) 99999-9999"
+                                    placeholder="Ex: (19) 994838-2329"
+                                    className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none"
+                                />
+                            )}
+                        />
+                        {
+                            errors.telephone &&
+                            <p className="block absolute top-20 inset-x-0 text-md font-semibold text-red-600 text-center">
+                                Digite seu telefone corretamente, por favor!
+                            </p>
+                        }
+                    </div>
+
+                    <div className="block w-1/3 relative">
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Gênero</label>
                         <input type="text" {...register('gender')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: Masculino, etc" />
                         {

@@ -18,7 +18,7 @@ export default async function handler(
             user.password = await hash(user.password, 10);
 
             const newUser = await prisma.user.create({  
-            data: user
+                data: user
             })
     
             res.status(200).json(newUser)

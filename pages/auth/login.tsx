@@ -49,19 +49,19 @@ function Login(props: {}, ref: LoginPageRef): JSX.Element {
 
 export default forwardRef(Login)
 
-export async function getServerSideProps(context: any) {
-  const session = await getServerSession(context.req, context.res, authOptions)
+// export async function getServerSideProps(context: any) {
+//   const session = await getServerSession(context.req, context.res, authOptions)
   
-  if(session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }
+//   if(session) {
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false
+//       }
+//     }
+//   }
 
-  return {
-    props: {}
-  }
-}
+//   return {
+//     props: {}
+//   }
+// }

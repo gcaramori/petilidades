@@ -11,13 +11,13 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const user = await fetch("http://localhost:3000/api/users/signin", {
+        const user = await fetch(`${process.env.API_URL}/api/users/signin`, {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
         }).then(res => res.json())
   
-        if(!user) {
+        if(!user || !user?.active) {
           return null
         }
         

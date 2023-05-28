@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react'
+import React, { useState, forwardRef } from 'react'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/header/navbar'
 import nookies from 'nookies'
@@ -11,7 +11,7 @@ type registerSuccessPageRef = React.ForwardedRef<HTMLDivElement>
 
 const inter = Inter({ subsets: ['latin'] })
 
-function RegisterSuccess({ cookies }: any, ref: registerSuccessPageRef): any {
+function RegisterSuccess({ cookies }: any, ref: registerSuccessPageRef): JSX.Element {
     const router = useRouter()
 
     const [isUserActive, setIsUserActive] = useState<Boolean>(false)
@@ -20,8 +20,6 @@ function RegisterSuccess({ cookies }: any, ref: registerSuccessPageRef): any {
     
     if(!registerData) {
         router.push('/auth/login')
-
-        return
     }
 
     const handleRegisterPinChange = async (e: any) => {

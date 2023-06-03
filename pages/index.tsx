@@ -1,12 +1,13 @@
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/header/navbar'
 import PageTransition from '@/components/shared/pageTransition'
+import { forwardRef } from 'react'
 
 type IndexPageRef = React.ForwardedRef<HTMLDivElement>
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home(ref: IndexPageRef) {
+function Home(prop:{}, ref: IndexPageRef) {
   return (
     <PageTransition ref={ref}>
       <Navbar />
@@ -17,3 +18,5 @@ export default function Home(ref: IndexPageRef) {
     </PageTransition>
   )
 }
+
+export default forwardRef(Home)

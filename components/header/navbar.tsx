@@ -100,23 +100,23 @@ export default function Navbar() {
                 ) : (
                     <>
                         <div className="block w-full relative pb-3">
-                            <nav className="w-full h-auto p-2 flex justify-center items-center gap-40 relative bg-main">
-                                <button className="inline-block z-20 relative p-4 bg-transparent border-none mr-10 active:outline-none focus:outline-none" onClick={handleOpenSidemenu}>
+                            <nav className="w-full h-auto p-2 flex justify-center items-center gap-10 relative bg-main">
+                                <button className="inline-block z-20 relative p-4 bg-transparent border-none md:mr-10 active:outline-none focus:outline-none" onClick={handleOpenSidemenu}>
                                     <MenuIcon fontSize="small" />
                                 </button>
 
-                                <div className="headerLogo inline-block w-28 h-[72px] relative">
+                                <div className="headerLogo inline-block w-[128px] h-[72px] relative">
                                     <Image 
                                         src="/logo.png" 
                                         alt="logo" 
                                         fill 
                                         style={{ objectFit: "contain" }}
-                                        sizes="(max-width: 1024px) 128px, 250px"
+                                        sizes="128px"
                                         priority
                                     />
                                 </div>
 
-                                <div className="w-36 h-full flex justify-center items-center gap-6 relative">
+                                <div className="w-36 h-full flex justify-center items-center gap-3 relative">
                                     <div>
                                         <button type="button" className="inline-block text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative hover:border-black">
                                             <ShoppingCartIcon fontSize="small" />

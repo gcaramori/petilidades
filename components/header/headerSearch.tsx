@@ -6,8 +6,8 @@ export default function HeaderSearch() {
     }
 
     return (
-        <div className="flex justify-center items-center relative w-56 md:w-full xl:w-80 px-10 lg:px-0">
-            <button type="button" className="absolute top-[.2rem] xl:top-[.6rem] left-8 md:left-16 lg:left-4 z-30" onClick={handleSearch}>
+        <div className="flex justify-center items-center relative w-full xl:w-80 px-4 md:px-10 lg:px-0">
+            <button type="button" className="absolute top-[.2rem] xl:top-[.6rem] left-10 md:left-16 lg:left-4 z-30" onClick={handleSearch}>
                 <SearchIcon />
             </button>
 

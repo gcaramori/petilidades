@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import type { NextAuthOptions } from 'next-auth'
+import { User } from "@prisma/client"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,9 +17,13 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
         }).then(res => res.json())
-  
-        if(!user || !user?.active) {
-          return null
+        
+        if(!user) {
+          throw new Error("Usuário e/ou senha incorretos!")
+        }
+
+        if(!user?.active) {
+          throw new Error("Usuário não está ativo!")
         }
         
         return user

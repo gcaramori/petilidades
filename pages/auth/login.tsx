@@ -1,6 +1,5 @@
 import { useState, useCallback, forwardRef } from 'react'
 import { Inter } from 'next/font/google'
-import Navbar from '@/components/header/navbar'
 import LoginForm from '@/components/user/loginForm'
 import RegisterForm from '@/components/user/registerForm'
 import { authOptions } from '../api/auth/[...nextauth]'
@@ -14,6 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 function Login(props: {}, ref: LoginPageRef): JSX.Element {
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   const openModal = useCallback(() => {
     setShowModal(true);
@@ -26,12 +26,10 @@ function Login(props: {}, ref: LoginPageRef): JSX.Element {
   return (
     <PageTransition ref={ref}>
       <main className={`w-full h-auto block m-0 p-0 ${inter.className} bg-main overflow-hidden`}>
-        <Navbar />
-        
-        <div className="flex items-start justify-center gap-10 relative py-20 px-10">
-          <LoginForm openModal={openModal} />
+        <div className="flex flex-col xl:flex-row items-start justify-center gap-10 relative py-12 xl:py-20 px-3 md:px-10 w-full">
+          <LoginForm openModal={openModal} setErrorMessage={setErrorMessage} />
 
-          <div className="block h-[650px] w-[2px] drop-shadow-md bg-black relative mx-24"></div>
+          <div className="block h-[1px] xl:h-[650px] w-[90%] xl:w-[2px] drop-shadow-md bg-black relative my-12 xl:my-0 mx-auto xl:mx-24"></div>
           
           <RegisterForm />
         </div>
@@ -39,7 +37,7 @@ function Login(props: {}, ref: LoginPageRef): JSX.Element {
 
       <AlertModal
         title="Oops..."
-        message="Usuário e/ou senha incorretos!"
+        message={errorMessage}
         onClose={closeModal}
         isOpen={showModal}
       />
@@ -51,12 +49,11 @@ export default forwardRef(Login)
 
 export async function getServerSideProps(context: any) {
   const session = await getServerSession(context.req, context.res, authOptions)
-  
+
   if(session) {
     return {
       redirect: {
-        destination: '/',
-        permanent: false
+        destination: '/'
       }
     }
   }

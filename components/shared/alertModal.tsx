@@ -16,7 +16,7 @@ export default function AlertModal({ title, message, onClose, isOpen }: AlertMod
 
     return (
         <div className={`fixed z-50 inset-0 overflow-y-auto ${isOpen ? '' : 'hidden'} ${inter.className}`}>
-            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="flex items-center md:items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity" aria-hidden="true">
                     <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
@@ -31,12 +31,12 @@ export default function AlertModal({ title, message, onClose, isOpen }: AlertMod
                 >
                     <div>
                         <div className="mt-3 text-center sm:mt-5">
-                            <h3 className="text-2xl leading-6 font-bold text-black mb-6" id="modal-headline">
+                            <h3 className="text-xl md:text-2xl leading-6 font-bold text-black mb-6" id="modal-headline">
                                 {title}
                             </h3>
 
                             <div className="mt-2">
-                                <p className="text-md font-medium text-gray-500">{message}</p>
+                                <p className="text-sm md:text-md font-medium text-gray-500">{message}</p>
                             </div>
                         </div>
                     </div>

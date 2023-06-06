@@ -10,8 +10,6 @@ const inter = Inter({ subsets: ['latin'] })
 function Home(prop:{}, ref: IndexPageRef) {
   return (
     <PageTransition ref={ref}>
-      <Navbar />
-
       <main className={`flex h-screen flex-col items-center justify-between p-24 ${inter.className} overflow-hidden`}>
         
       </main>

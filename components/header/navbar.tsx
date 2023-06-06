@@ -100,7 +100,7 @@ export default function Navbar() {
                 ) : (
                     <>
                         <div className="block w-full relative pb-3">
-                            <nav className="w-full h-auto p-2 flex justify-center items-center gap-10 relative bg-main">
+                            <nav className="w-full h-auto p-2 flex justify-center items-center gap-10 md:gap-44 relative bg-main">
                                 <button className="inline-block z-20 relative p-4 bg-transparent border-none md:mr-10 active:outline-none focus:outline-none" onClick={handleOpenSidemenu}>
                                     <MenuIcon fontSize="small" />
                                 </button>

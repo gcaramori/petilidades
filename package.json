@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.0",
     "@prisma/client": "^4.13.0",
+    "@vercel/analytics": "^1.0.1",
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^5.0.0",

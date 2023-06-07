@@ -4,6 +4,7 @@ import { SessionProvider } from 'next-auth/react'
 import { AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import Navbar from '@/components/header/navbar'
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps: { ...pageProps } }: AppProps) {
   const router = useRouter()
@@ -16,6 +17,8 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
         <Navbar />
 
         <Component key={pageKey} {...pageProps} />
+
+        <Analytics />
       </AnimatePresence>
     </SessionProvider>
   )

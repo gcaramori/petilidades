@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import Spinner from '../shared/spinner'
 
 const loginSchema = z.object({
     email: z.string().min(8, { message: 'Digite o email, por favor!' }),
@@ -17,7 +18,7 @@ export default function LoginForm({ openModal, setErrorMessage }: any) {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         resolver: zodResolver(loginSchema)
     })
@@ -53,7 +54,7 @@ export default function LoginForm({ openModal, setErrorMessage }: any) {
             <form className="flex flex-col justify-start items-center gap-12 h-auto w-full relative" onSubmit={handleSubmit(loginData => login(loginData))}>
                 <div className="block w-full relative">
                     <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>
-                    <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: teste@gmail.com" />
+                    <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: exemplo@gmail.com" />
                     {
                         errors.email?.message && 
                             <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
@@ -73,8 +74,12 @@ export default function LoginForm({ openModal, setErrorMessage }: any) {
                     }
                 </div>
 
-                <button type="submit" className="inline-block bg-black drop-shadow-md text-gray-100 px-8 py-2 text-lg font-semibold mt-10 transition-all hover:bg-gray-200 hover:text-black">
-                    Login
+                <button type="submit" className="flex justify-center items-center bg-black drop-shadow-md text-gray-100 h-12 w-24 text-lg font-semibold mt-10 transition-all hover:bg-gray-200 hover:text-black">
+                    {
+                        isSubmitting ? (
+                            <Spinner />
+                        ) : "Login"
+                    }
                 </button>
             </form>
 

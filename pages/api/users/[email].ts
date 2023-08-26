@@ -2,8 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Prisma, PrismaClient } from '@prisma/client'
 import { updateUserSchema } from '@/schemas/updateUserSchema';
 
-type UserWhereUniqueInput = Prisma.UserWhereUniqueInput
-
 const prisma = new PrismaClient()
 
 export default async function handler(
@@ -14,7 +12,7 @@ export default async function handler(
 
     if(method === 'PUT') {
       try {
-        const { email }: UserWhereUniqueInput = query;
+        const { email } = query;
 
         const validatedData = updateUserSchema.parse(body)
 
@@ -26,11 +24,11 @@ export default async function handler(
         res.status(200).json({ updatedUser })
       }
       catch(error: any) {
-        res.status(400).json({ error: error.message || "Error trying to update a new user!" })
+        res.status(400).json({ error: error.message || "Erro ao ativar usuário!" })
       }
     }
     else if(method === 'GET') {
-      const { email }: UserWhereUniqueInput = query;
+      const { email } = query;
 
       const user = await prisma.user.findUnique({
         where: { email }

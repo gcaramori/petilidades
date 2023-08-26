@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createTransport } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import { serialize } from 'cookie';
+import { setCookie } from 'cookies-next';
 
 const transporter = createTransport({
   host: process.env.MAIL_HOST,
@@ -26,12 +26,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const mailOptions = {
       from: 'petilidades@gmail.com',
       to: email,
-      subject: 'Cadastrado com sucesso!',
-      html: `Obrigado por se cadastrar, amigo! Segue seu PIN de acesso: ${pin}`,
+      subject: 'Solicitação para trocar a senha!',
+      html: `Para trocar sua senha digite o código: ${pin}`,
     };
 
     try {
-      res.setHeader('Set-Cookie', serialize('register_data', JSON.stringify({ email, pin }), { httpOnly: true, secure: true, sameSite: true, path: '/', maxAge: 600 }));
+      setCookie('change_password', pin, { req, res, maxAge: 600, });
 
       await transporter.sendMail(mailOptions);
 
@@ -42,6 +42,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   }
   else {
-    res.status(500).json({ error: "Rota não encontrada!" });
+    res.status(500).json({ message: "Method not allowed!" });
   }
 };

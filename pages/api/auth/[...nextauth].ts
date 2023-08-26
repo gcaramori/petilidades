@@ -1,7 +1,6 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import type { NextAuthOptions } from 'next-auth'
-import { User } from "@prisma/client"
 
 export const authOptions: NextAuthOptions = {
   providers: [

@@ -1,21 +1,20 @@
-import { useEffect, useState, useCallback } from "react"
+import { forwardRef, useEffect, useState, useCallback } from "react"
 import Image from "next/image"
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import HeaderSearch from "./headerSearch"
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import PersonIcon from '@mui/icons-material/Person'
-import MenuIcon from '@mui/icons-material/Menu';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import { FaShoppingCart } from 'react-icons/fa'
+import { BsFillPersonFill } from 'react-icons/bs'
 import UserDropdown from "./userDropdown"
 import Tooltip from "../shared/tooltip"
 import { useSession } from "next-auth/react"
 import useDeviceType from "@/hooks/useDeviceType"
 import { motion } from "framer-motion"
-import CloseIcon from '@mui/icons-material/Close';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Navbar() {
+function Navbar() {
     const { data: session } = useSession()
 
     const device = useDeviceType()
@@ -77,8 +76,8 @@ export default function Navbar() {
 
                         <div className="w-36 h-full flex justify-center items-center gap-6 relative">
                             <div>
-                                <button type="button" className="inline-block text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative hover:border-black">
-                                    <ShoppingCartIcon fontSize="small" />
+                                <button type="button" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative hover:border-black">
+                                    <FaShoppingCart size="0.9rem" />
                                 </button>
                             </div>
 
@@ -89,7 +88,7 @@ export default function Navbar() {
                                     : (
                                         <Tooltip text="Fazer login ou cadastrar-se">
                                             <Link href="/auth/login" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black">
-                                                <PersonIcon fontSize="small" />
+                                                <BsFillPersonFill size="0.9rem" />
                                             </Link>
                                         </Tooltip>
                                     )
@@ -101,8 +100,8 @@ export default function Navbar() {
                     <>
                         <div className="block w-full relative pb-3">
                             <nav className="w-full h-auto p-2 flex justify-center items-center gap-10 md:gap-44 relative bg-main">
-                                <button className="inline-block z-20 relative p-4 bg-transparent border-none md:mr-10 active:outline-none focus:outline-none" onClick={handleOpenSidemenu}>
-                                    <MenuIcon fontSize="small" />
+                                <button className="flex justify-center items-center z-20 relative p-4 bg-transparent border-none md:mr-10 active:outline-none focus:outline-none" onClick={handleOpenSidemenu}>
+                                    <AiOutlineMenu size="0.9rem" />
                                 </button>
 
                                 <div className="headerLogo inline-block w-[128px] h-[72px] relative">
@@ -118,8 +117,8 @@ export default function Navbar() {
 
                                 <div className="w-36 h-full flex justify-center items-center gap-3 relative">
                                     <div>
-                                        <button type="button" className="inline-block text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative hover:border-black">
-                                            <ShoppingCartIcon fontSize="small" />
+                                        <button type="button" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative hover:border-black">
+                                            <FaShoppingCart size="small" />
                                         </button>
                                     </div>
 
@@ -130,7 +129,7 @@ export default function Navbar() {
                                             : (
                                                 <Tooltip text="Fazer login ou cadastrar-se">
                                                     <Link href="/auth/login" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black">
-                                                        <PersonIcon fontSize="small" />
+                                                        <BsFillPersonFill size="0.9rem" />
                                                     </Link>
                                                 </Tooltip>
                                             )
@@ -150,7 +149,7 @@ export default function Navbar() {
                                     <motion.div className="block h-full w-full relative" initial={{ opacity: 0, x: '-100%' }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .2, ease: 'easeInOut' }}>
                                         <div className="block h-full w-full relative py-12 bg-main z-30 shadow-md">
                                             <button className="block w-6 h-6 absolute top-2 right-2 z-40" onClick={handleCloseSidemenu}>
-                                                <CloseIcon fontSize="small" />
+                                                <AiOutlineClose size="0.9rem" />
                                             </button>
 
                                             <ul className="flex flex-col justify-start items-center gap-8 w-full h-full font-bold uppercase">
@@ -186,3 +185,5 @@ export default function Navbar() {
         </header>
     )
 }
+
+export default forwardRef(Navbar)

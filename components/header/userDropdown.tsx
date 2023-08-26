@@ -1,5 +1,5 @@
 import Link from "next/link"
-import PersonIcon from '@mui/icons-material/Person';
+import { BsFillPersonFill } from 'react-icons/bs'
 import { useState, useCallback } from 'react'
 import { signOut } from "next-auth/react"
 
@@ -14,8 +14,8 @@ export default function UserDropdown() {
 
   return (
     <div className="relative block w-auto">
-        <button type="button" className="inline-block text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black" onClick={handleUserButton}>
-            <PersonIcon fontSize="small" />
+        <button type="button" className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black" onClick={handleUserButton}>
+            <BsFillPersonFill size="0.9rem" />
         </button>
         
         <div className="block absolute top-12 left-[-50px] rounded-md drop-shadow-md w-auto h-auto transition-all whitespace-nowrap bg-gray-100">  

@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import InputMask from 'react-input-mask'
 import { useRouter } from 'next/router'
+import Spinner from '../shared/spinner'
 
 const registerSchema = z.object({
     email: z.string().min(8, { message: 'Digite o email, por favor!' }).regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, { message: 'Digite o email corretamente, por favor!' }),
@@ -21,7 +22,7 @@ export default function RegisterForm() {
         control,
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         resolver: zodResolver(registerSchema)
     })
@@ -37,8 +38,6 @@ export default function RegisterForm() {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
-
-        console.log(newUser)
 
         if(!newUser) return false
 
@@ -73,7 +72,7 @@ export default function RegisterForm() {
                 <div className="form-row w-full flex flex-col md:flex-row justify-center items-center gap-10 xl:gap-6 relative">
                     <div className="block w-full md:w-1/2 relative">
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>
-                        <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: teste@gmail.com" />
+                        <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: exemplo@gmail.com" />
                         {
                             errors.email?.message && 
                                 <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
@@ -217,7 +216,11 @@ export default function RegisterForm() {
                 </div>
 
                 <button type="submit" className="inline-block bg-black drop-shadow-md text-gray-100 px-8 py-2 text-lg font-semibold mt-10 transition-all hover:bg-gray-200 hover:text-black">
-                    Cadastrar
+                    {
+                        isSubmitting ? (
+                            <Spinner />
+                        ) : "Cadastrar"
+                    }
                 </button>   
             </form>
         </div>

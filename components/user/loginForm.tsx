@@ -29,7 +29,7 @@ export default function LoginForm({ openModal, setErrorMessage }: any) {
         const signInResponse = await signIn('credentials', { ...loginData, redirect: false })
 
         if(signInResponse?.error) {
-            setErrorMessage(signInResponse?.error)
+            setErrorMessage("Login e/ou senha incorretos!")
 
             openModal()
             

@@ -1,6 +1,5 @@
 import React, { useState, useCallback, forwardRef } from 'react'
 import { Inter } from 'next/font/google'
-import { useRouter } from 'next/router'
 import PageTransition from '@/components/shared/pageTransition'
 import { motion } from 'framer-motion'
 import AlertModal from '@/components/shared/alertModal'
@@ -13,8 +12,6 @@ type recoverPasswordPageRef = React.ForwardedRef<HTMLDivElement>
 const inter = Inter({ subsets: ['latin'] })
 
 function RecoverPassword({ cookies }: any, ref: recoverPasswordPageRef): JSX.Element {  
-    const router = useRouter()
-
     const [activeStep, setActiveStep] = useState<number>(0)
     const [email, setEmail] = useState<string>("")
     const [pin, setPin] = useState<string>("")

@@ -4,10 +4,9 @@ const useDeviceType = () => {
   const [deviceType, setDeviceType] = useState('desktop')
 
   const handleResize = useCallback(() => {
-    if(window.innerWidth <= 768) {
+    if (window.innerWidth <= 768) {
       setDeviceType('mobile')
-    } 
-    else {
+    } else {
       setDeviceType('desktop')
     }
   }, [])

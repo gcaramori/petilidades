@@ -9,8 +9,8 @@ module.exports = {
     extend: {
       colors: {
         main: '#F5F0F0',
-        grayBorder: '#ABA6A6'
-      }
+        grayBorder: '#ABA6A6',
+      },
     },
   },
   plugins: [],

@@ -19,7 +19,7 @@
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^5.0.0",
     "cookies-next": "^2.1.2",
-    "eslint": "8.39.0",
+    "embla-carousel": "8.0.0-rc14",
     "eslint-config-next": "13.3.2",
     "express-session": "^1.17.3",
     "framer-motion": "^10.12.16",
@@ -49,6 +49,7 @@
     "@types/nodemailer": "^6.4.8",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
-    "@types/react-input-mask": "^3.0.2"
+    "@types/react-input-mask": "^3.0.2",
+    "eslint": "8.39.0"
   }
 }

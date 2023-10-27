@@ -2,8 +2,6 @@ import { useState, useCallback, forwardRef } from 'react'
 import { Inter } from 'next/font/google'
 import LoginForm from '@/components/user/loginForm'
 import RegisterForm from '@/components/user/registerForm'
-import { authOptions } from '../api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth'
 import AlertModal from '@/components/shared/alertModal'
 import PageTransition from '@/components/shared/pageTransition'
 
@@ -46,19 +44,3 @@ function Login(props: {}, ref: LoginPageRef): JSX.Element {
 }
 
 export default forwardRef(Login)
-
-export async function getServerSideProps(context: any) {
-  const session = await getServerSession(context.req, context.res, authOptions)
-
-  if(session) {
-    return {
-      redirect: {
-        destination: '/'
-      }
-    }
-  }
-
-  return {
-    props: {}
-  }
-}

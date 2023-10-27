@@ -1,4 +1,5 @@
 import React, { useState, useCallback, forwardRef } from 'react'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { Inter } from 'next/font/google'
 import PageTransition from '@/components/shared/pageTransition'
 import { motion } from 'framer-motion'
@@ -11,7 +12,9 @@ type recoverPasswordPageRef = React.ForwardedRef<HTMLDivElement>
 
 const inter = Inter({ subsets: ['latin'] })
 
-function RecoverPassword({ cookies }: any, ref: recoverPasswordPageRef): JSX.Element {  
+function RecoverPassword(cookies: {
+    change_password: string
+}, ref: recoverPasswordPageRef): JSX.Element {  
     const [activeStep, setActiveStep] = useState<number>(0)
     const [email, setEmail] = useState<string>("")
     const [pin, setPin] = useState<string>("")
@@ -30,15 +33,15 @@ function RecoverPassword({ cookies }: any, ref: recoverPasswordPageRef): JSX.Ele
       setShowModal(false);
     }, [])
 
-    const handleEmailInputChange = useCallback((e: any) => {
+    const handleEmailInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
     }, []);
 
-    const handlePinInputChange = useCallback((e: any) => {
+    const handlePinInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setPin(e.target.value)
     }, []);
 
-    const handlePasswordInputChange = useCallback((e: any) => {
+    const handlePasswordInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setNewPassword(e.target.value)
     }, []);
 
@@ -286,7 +289,7 @@ function RecoverPassword({ cookies }: any, ref: recoverPasswordPageRef): JSX.Ele
 
 export default forwardRef(RecoverPassword)
 
-export async function getServerSideProps({ req, res }: any) {
+export async function getServerSideProps(req: NextApiRequest, res: NextApiResponse) {
     const cookies = getCookies({ req, res })
         
     return { props: { cookies } }

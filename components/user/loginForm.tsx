@@ -1,18 +1,23 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import Spinner from '../shared/spinner'
 
+interface ILoginForm {
+    openModal: () => void
+    setErrorMessage: (errorMessage: string) => void
+}
+
 const loginSchema = z.object({
     email: z.string().min(8, { message: 'Digite o email, por favor!' }),
     password: z.string().min(1)
 })
 
-export default function LoginForm({ openModal, setErrorMessage }: any) {
+export default function LoginForm({ openModal, setErrorMessage }: ILoginForm) {
     const router = useRouter()
 
     const {
@@ -25,11 +30,11 @@ export default function LoginForm({ openModal, setErrorMessage }: any) {
 
     const [showForgetPasswordModal, setShowForgetPasswordModal] = useState<boolean>(false)
 
-    const login = async (loginData: any) => {
+    const login = async (loginData: FieldValues) => {
         const signInResponse = await signIn('credentials', { ...loginData, redirect: false })
 
         if(signInResponse?.error) {
-            setErrorMessage("Login e/ou senha incorretos!")
+            setErrorMessage(signInResponse?.error)
 
             openModal()
             

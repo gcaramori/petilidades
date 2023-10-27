@@ -1,17 +1,20 @@
 import React, { useState, forwardRef, useCallback } from 'react'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 import PageTransition from '@/components/shared/pageTransition'
 import { motion } from 'framer-motion'
+import { getCookies } from 'cookies-next'
 import Link from 'next/link'
 import AlertModal from '@/components/shared/alertModal'
-import { getCookies } from 'cookies-next'
 
 type registerSuccessPageRef = React.ForwardedRef<HTMLDivElement>
 
 const inter = Inter({ subsets: ['latin'] })
 
-function RegisterSuccess({ cookies }: any, ref: registerSuccessPageRef): JSX.Element {
+function RegisterSuccess(cookies: {
+    register_data: string
+}, ref: registerSuccessPageRef): JSX.Element {
     const router = useRouter()
 
     const [isUserActive, setIsUserActive] = useState<Boolean>(false)
@@ -117,7 +120,7 @@ function RegisterSuccess({ cookies }: any, ref: registerSuccessPageRef): JSX.Ele
 
 export default forwardRef(RegisterSuccess)
 
-export async function getServerSideProps({ req, res }: any) {
+export async function getServerSideProps(req: NextApiRequest, res: NextApiResponse) {
     const cookies = getCookies({ req, res })
         
     return { props: { cookies } }

@@ -4,16 +4,19 @@ import { SessionProvider } from 'next-auth/react'
 import { AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
 import Navbar from '@/components/header/navbar'
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react'
 
-export default function App({ Component, pageProps: { ...pageProps } }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { ...pageProps },
+}: AppProps) {
   const router = useRouter()
-  
+
   const pageKey = router.asPath
 
   return (
-    <SessionProvider>
-      <AnimatePresence  initial={false} mode="popLayout">
+    <SessionProvider session={pageProps.session}>
+      <AnimatePresence initial={false} mode="popLayout">
         <Navbar />
 
         <Component key={pageKey} {...pageProps} />

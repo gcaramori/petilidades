@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
-import { addUserSchema } from '@/schemas/addUserSchema';
-import { hash } from 'bcryptjs';
+import { addUserSchema } from '@/schemas/addUserSchema'
+import { hash } from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
@@ -9,13 +9,13 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const { method, body } = req;
+    const { method, body } = req
 
     if (method === 'POST') {
         try {
-            const user = addUserSchema.parse(body);
+            const user = addUserSchema.parse(body)
 
-            user.password = await hash(user.password, 10);
+            user.password = await hash(user.password, 10)
 
             const newUser = await prisma.user.create({
                 data: user
@@ -33,7 +33,7 @@ export default async function handler(
         res.status(200).json(users)
     }
     else if (method === 'PUT') {
-        const { email, ...userInfo } = req.body;
+        const { email, ...userInfo } = req.body
 
         if (!email) {
             res.status(400).json({ error: "Email não informado!" })
@@ -47,13 +47,13 @@ export default async function handler(
                 data: userInfo
             })
 
-            res.status(200).json(updatedUser);
+            res.status(200).json(updatedUser)
         }
         catch (error: any) {
             res.status(400).json({ error: error.message || "Erro ao atualizar usuário!" })
         }
     }
     else {
-        res.status(500).json({ error: "Rota não encontrada!" });
+        res.status(500).json({ error: "Rota não encontrada!" })
     }
 }

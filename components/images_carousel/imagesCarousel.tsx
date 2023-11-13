@@ -29,15 +29,15 @@ export default function ImagesSlider({
                 height={900}
                 src={imagePath}
                 alt={`banner_image_${index}`}
+                priority
               />
 
               <Link
                 href="/mais-vendidos"
-                className={`absolute ${
-                  imagePath === '/banner_1.png'
+                className={`absolute ${imagePath === '/banner_1.png'
                     ? 'bottom-32 right-64 bg-mainGreen border-mainGreen hover:text-mainGreen'
                     : 'bottom-48  left-16 bg-mainPink border-mainPink hover:text-mainPink'
-                } flex justify-center w-72 h-20 items-center z-50 text-2xl font-bold text-white border-2 rounded-md transition-all hover:bg-transparent`}
+                  } flex justify-center w-72 h-20 items-center z-50 text-2xl font-bold text-white border-2 rounded-md transition-all hover:bg-transparent`}
               >
                 Veja agora
               </Link>

@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { Pagination } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 interface IProductSlider {
   id: string
@@ -32,8 +32,8 @@ export default function ProductsSlider({
       </h2>
 
       <Swiper
-        modules={[Navigation]}
-        navigation={{ enabled: true }}
+        modules={[Pagination]}
+        pagination={{ enabled: true }}
         slidesPerView={5}
         spaceBetween={15}
       >

@@ -14,11 +14,11 @@ function Login(props: {}, ref: LoginPageRef): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>("")
 
   const openModal = useCallback(() => {
-    setShowModal(true);
+    setShowModal(true)
   }, [])
 
   const closeModal = useCallback(() => {
-    setShowModal(false);
+    setShowModal(false)
   }, [])
 
   return (
@@ -28,7 +28,7 @@ function Login(props: {}, ref: LoginPageRef): JSX.Element {
           <LoginForm openModal={openModal} setErrorMessage={setErrorMessage} />
 
           <div className="block h-[1px] xl:h-[650px] w-[90%] xl:w-[2px] drop-shadow-md bg-black relative my-12 xl:my-0 mx-auto xl:mx-24"></div>
-          
+
           <RegisterForm />
         </div>
       </main>

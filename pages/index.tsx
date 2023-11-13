@@ -1,14 +1,25 @@
+import Link from 'next/link'
+import { forwardRef } from 'react'
 import { Inter } from 'next/font/google'
 import PageTransition from '@/components/shared/pageTransition'
-import { forwardRef } from 'react'
 import ImagesSlider from '@/components/images_carousel/imagesCarousel'
 import ProductsSlider from '@/components/products_carousel/productsCarousel'
+import { BsArrowRight } from 'react-icons/bs'
 
 type IndexPageRef = React.ForwardedRef<HTMLDivElement>
 
 const inter = Inter({ subsets: ['latin'] })
 
-const bannerImages = ['/banner_1.png', '/banner_2.png']
+const bannerImages = [
+  {
+    imagePath: '/b1.png',
+    CTA: <Link className="flex items-center gap-4 text-4xl font-bold text-white absolute bottom-24 right-16 transition-all hover:opacity-80" href="/mais-vendidos">Ver agora <BsArrowRight size="2rem" /></Link>
+  },
+  {
+    imagePath: '/b2.png',
+    CTA: <Link className="flex items-center gap-4 text-4xl font-bold text-white absolute bottom-24 left-16 transition-all hover:opacity-80" href="/mais-vendidos">Ver agora <BsArrowRight size="2rem" /></Link>
+  }
+]
 
 const products = [
   {
@@ -69,7 +80,7 @@ function Home(prop: object, ref: IndexPageRef) {
       >
         <div className="flex flex-col justify-center items-start relative max-w-[1280px]">
           <div className="banner block relative pt-4 w-full">
-            <ImagesSlider imagesPaths={bannerImages} />
+            <ImagesSlider slides={bannerImages} />
           </div>
 
           <div className="best-sellers block relative pt-4 w-full">

@@ -12,10 +12,12 @@ export default async function handler(
 
   if (method === 'PUT') {
     try {
+      const { email } = query
+
       const validatedData = updateUserSchema.parse(body)
 
       const updatedUser = await prisma.user.update({
-        where: { email: validatedData.email },
+        where: { email: email?.toString() },
         data: validatedData
       })
 
@@ -29,7 +31,7 @@ export default async function handler(
     const { email } = query
 
     const user = await prisma.user.findUnique({
-      where: { email }
+      where: { email: email?.toString() }
     })
 
     res.status(200).json({ user })

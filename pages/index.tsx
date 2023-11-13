@@ -1,3 +1,4 @@
+import { InferGetServerSidePropsType, GetStaticProps } from 'next'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 import { Inter } from 'next/font/google'
@@ -7,6 +8,27 @@ import ProductsSlider from '@/components/products_carousel/productsCarousel'
 import { BsArrowRight } from 'react-icons/bs'
 
 type IndexPageRef = React.ForwardedRef<HTMLDivElement>
+
+interface IProducts {
+  id: number
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  stock: number
+  brand: string
+  category: string
+  thumbnail: string
+  images: string[]
+}
+
+interface IApiResponse {
+  products: IProducts[],
+  total: number
+  skip: number
+  limit: number
+}
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +43,7 @@ const bannerImages = [
   }
 ]
 
-const products = [
+const productsMock = [
   {
     id: '01',
     url: 'https:/google.com',
@@ -72,7 +94,15 @@ const products = [
   },
 ]
 
-function Home(prop: object, ref: IndexPageRef) {
+export const getStaticProps = (async (context) => {
+  const products = await fetch('https://dummyjson.com/products')
+    .then(res => res.json())
+
+  return { props: products }
+}) satisfies GetStaticProps<{ products: IApiResponse }>
+
+function Home(props: IApiResponse, ref: IndexPageRef) {
+  console.log('props: ', props)
   return (
     <PageTransition ref={ref}>
       <main
@@ -84,7 +114,7 @@ function Home(prop: object, ref: IndexPageRef) {
           </div>
 
           <div className="best-sellers block relative pt-4 w-full">
-            <ProductsSlider title="Os mais vendidos" products={products} />
+            <ProductsSlider title="Os mais vendidos" products={productsMock} />
           </div>
         </div>
       </main>

@@ -16,15 +16,15 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
         }).then(res => res.json())
-        
-        if(!user) {
+
+        if (!user) {
           throw new Error("Usuário e/ou senha incorretos!")
         }
 
-        if(!user?.active) {
+        if (!user?.active) {
           throw new Error("Usuário não está ativo!")
         }
-        
+
         return user
       },
     })
@@ -36,8 +36,8 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ user }: any) {
-      if(user.email) return user
-      
+      if (user.email) return user
+
       return false
     }
   }

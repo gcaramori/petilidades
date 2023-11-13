@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 function RecoverPassword(cookies: {
     change_password: string
-}, ref: recoverPasswordPageRef): JSX.Element {  
+}, ref: recoverPasswordPageRef): JSX.Element {
     const [activeStep, setActiveStep] = useState<number>(0)
     const [email, setEmail] = useState<string>("")
     const [pin, setPin] = useState<string>("")
@@ -24,13 +24,13 @@ function RecoverPassword(cookies: {
     const [sendPinCodeLoading, setSendPinCodeLoading] = useState<boolean>(false)
     const [validatePinCodeLoading, setValidatePinCodeLoading] = useState<boolean>(false)
     const [changePasswordLoading, setChangePasswordLoading] = useState<boolean>(false)
-  
+
     const openModal = useCallback(() => {
-      setShowModal(true);
+        setShowModal(true);
     }, [])
-  
+
     const closeModal = useCallback(() => {
-      setShowModal(false);
+        setShowModal(false);
     }, [])
 
     const handleEmailInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,11 +48,11 @@ function RecoverPassword(cookies: {
     const handleSendPinCodeSubmit = async () => {
         setSendPinCodeLoading(true)
 
-        if(email === "") {
+        if (email === "") {
             setErrorMessage("Digite um email, por favor!")
 
             openModal()
-            
+
             setSendPinCodeLoading(false)
 
             return
@@ -67,13 +67,13 @@ function RecoverPassword(cookies: {
                 "Content-Type": "application/json"
             }
         })
-        .then(res => res.json())
+            .then(res => res.json())
 
-        if(emailReponse.code) {
+        if (emailReponse.code) {
             setErrorMessage("Erro ao enviar email!")
 
             openModal()
-            
+
             setSendPinCodeLoading(false)
 
             return
@@ -85,17 +85,17 @@ function RecoverPassword(cookies: {
     const handleValidatePin = async () => {
         setValidatePinCodeLoading(true)
 
-        if(pin === "") {
+        if (pin === "") {
             setErrorMessage("Digite o PIN, por favor!")
 
             openModal()
-            
+
             setValidatePinCodeLoading(false)
 
             return
         }
 
-        if(cookies.change_password === undefined || cookies.change_password === "") {
+        if (cookies.change_password === undefined || cookies.change_password === "") {
             setErrorMessage("O cookie não foi gerado!")
 
             openModal()
@@ -105,11 +105,11 @@ function RecoverPassword(cookies: {
             return
         }
 
-        if(pin != cookies.change_password) {
+        if (pin != cookies.change_password) {
             setErrorMessage("O PIN não foi validado!")
 
             openModal()
-            
+
             setValidatePinCodeLoading(false)
 
             return
@@ -123,21 +123,21 @@ function RecoverPassword(cookies: {
     const handleChangePassword = async () => {
         setChangePasswordLoading(true)
 
-        if(newPassword === "") {
+        if (newPassword === "") {
             setErrorMessage("Digite a senha, por favor!")
 
             openModal()
-            
+
             setValidatePinCodeLoading(false)
 
             return
         }
 
-        if(!newPassword.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).+$/)) {
+        if (!newPassword.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).+$/)) {
             setErrorMessage("A senha precisa ter pelo menos 8 dígitos, contendo 1 caractere maíusculo, 1 caractere especial e 1 número!")
 
             openModal()
-            
+
             setChangePasswordLoading(false)
 
             return
@@ -153,19 +153,19 @@ function RecoverPassword(cookies: {
                 "Content-Type": "application/json"
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
 
-            setChangePasswordLoading(false)
+                setChangePasswordLoading(false)
 
-            setActiveStep(3)
-        })
-        .catch(err => {
-            setErrorMessage(err)
+                setActiveStep(3)
+            })
+            .catch(err => {
+                setErrorMessage(err)
 
-            openModal()
-        })
+                openModal()
+            })
     }
 
     return (
@@ -173,7 +173,7 @@ function RecoverPassword(cookies: {
             <PageTransition ref={ref}>
                 <main className={`w-full h-auto block m-0 p-0 ${inter.className} bg-main overflow-hidden`}>
                     {
-                        activeStep === 0 && 
+                        activeStep === 0 &&
                         (
                             <div className="flex flex-col items-center justify-start gap-10 relative pt-20 pb-[205px] px-10 h-auto transition-all">
                                 <div className="flex flex-col justify-start items-center relative gap-4 mb-16">
@@ -201,7 +201,7 @@ function RecoverPassword(cookies: {
                         )
                     }
                     {
-                        activeStep === 1 && 
+                        activeStep === 1 &&
                         (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }}>
                                 <div className="flex flex-col items-center justify-center gap-10 relative px-10 xl:h-[529px] transition-all">
@@ -209,7 +209,7 @@ function RecoverPassword(cookies: {
                                         <h1 className="block text-xl md:text-4xl text-black font-bold drop-shadow-md text-left">
                                             Valide o PIN de segurança
                                         </h1>
-                                        
+
                                         <div className="block relative p-2 w-full max-w-sm">
                                             <input type="text" className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-md md:text-xl font-semibold focus:outline-none active:outline-none" placeholder="Ex: 8612690916" onChange={handlePinInputChange} />
                                         </div>
@@ -227,7 +227,7 @@ function RecoverPassword(cookies: {
                         )
                     }
                     {
-                        activeStep === 2 && 
+                        activeStep === 2 &&
                         (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }}>
                                 <div className="flex flex-col items-center justify-center gap-10 relative px-10 xl:h-[529px] transition-all">
@@ -235,7 +235,7 @@ function RecoverPassword(cookies: {
                                         <h1 className="block text-xl md:text-4xl text-black font-bold drop-shadow-md text-left">
                                             Digite sua nova senha
                                         </h1>
-                                        
+
                                         <div className="block relative p-2 w-full max-w-sm">
                                             <input type="text" className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-md md:text-xl font-semibold focus:outline-none active:outline-none" placeholder="Ex: 8612690916" onChange={handlePasswordInputChange} />
                                         </div>
@@ -253,7 +253,7 @@ function RecoverPassword(cookies: {
                         )
                     }
                     {
-                        activeStep === 3 && 
+                        activeStep === 3 &&
                         (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }}>
                                 <div className="flex flex-col items-center justify-center gap-10 relative px-10 xl:h-[529px] transition-all">
@@ -261,7 +261,7 @@ function RecoverPassword(cookies: {
                                         <h1 className="block text-xl md:text-4xl text-black font-bold drop-shadow-md text-left">
                                             Pronto!
                                         </h1>
-                                        
+
                                         <span className="block text-center xl:text-left text-gray-400 font-medium text-xl">
                                             Sua senha foi trocada com sucesso!
                                         </span>
@@ -276,8 +276,8 @@ function RecoverPassword(cookies: {
                     }
                 </main>
             </PageTransition>
-            
-            <AlertModal 
+
+            <AlertModal
                 title="Oops..."
                 message={errorMessage}
                 onClose={closeModal}
@@ -291,6 +291,6 @@ export default forwardRef(RecoverPassword)
 
 export async function getServerSideProps(req: NextApiRequest, res: NextApiResponse) {
     const cookies = getCookies({ req, res })
-        
+
     return { props: { cookies } }
 }

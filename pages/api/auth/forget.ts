@@ -14,12 +14,12 @@ const transporter = createTransport({
 } as SMTPTransport.Options);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if(req.method === 'POST') {
+  if (req.method === 'POST') {
     const { email } = req.body;
 
     let pin = '';
 
-    for(let i = 0; i < 8; i++) {
+    for (let i = 0; i < 8; i++) {
       pin += Math.floor(Math.random() * 10);
     }
 
@@ -36,8 +36,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await transporter.sendMail(mailOptions);
 
       res.status(200).json({ status: 'ok' });
-    } 
-    catch(error) {
+    }
+    catch (error) {
       res.status(500).json(error);
     }
   }

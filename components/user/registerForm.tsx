@@ -27,7 +27,7 @@ export default function RegisterForm() {
         resolver: zodResolver(registerSchema)
     })
 
-    const registerUser = async (registerData : FieldValues) => {
+    const registerUser = async (registerData: FieldValues) => {
         const newUser = await fetch('/api/users', {
             method: 'POST',
             body: JSON.stringify({
@@ -39,7 +39,7 @@ export default function RegisterForm() {
             }
         }).then(res => res.json())
 
-        if(!newUser) return false
+        if (!newUser) return false
 
         const sendActivationEmail = await fetch('/api/register/success', {
             method: 'POST',
@@ -49,7 +49,7 @@ export default function RegisterForm() {
             }
         })
 
-        if(!sendActivationEmail) return false
+        if (!sendActivationEmail) return false
 
         router.push('/register/success')
 
@@ -74,10 +74,10 @@ export default function RegisterForm() {
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>
                         <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: exemplo@gmail.com" />
                         {
-                            errors.email?.message && 
-                                <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
-                                    {errors.email?.message?.toString()}
-                                </p>
+                            errors.email?.message &&
+                            <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
+                                {errors.email?.message?.toString()}
+                            </p>
                         }
                     </div>
 
@@ -98,10 +98,10 @@ export default function RegisterForm() {
                         <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Nome</label>
                         <input {...register('name')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: José Alves da Silva" />
                         {
-                            errors.name?.message && 
-                                <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
-                                    {errors.name?.message?.toString()}
-                                </p>
+                            errors.name?.message &&
+                            <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
+                                {errors.name?.message?.toString()}
+                            </p>
                         }
                     </div>
 
@@ -110,7 +110,7 @@ export default function RegisterForm() {
                         <Controller
                             name="cpf"
                             control={control}
-                            render={({ 
+                            render={({
                                 field: {
                                     onChange,
                                     onBlur,
@@ -144,7 +144,7 @@ export default function RegisterForm() {
                         <Controller
                             name="birth"
                             control={control}
-                            render={({ 
+                            render={({
                                 field: {
                                     onChange,
                                     onBlur,
@@ -176,7 +176,7 @@ export default function RegisterForm() {
                         <Controller
                             name="telephone"
                             control={control}
-                            render={({ 
+                            render={({
                                 field: {
                                     onChange,
                                     onBlur,
@@ -221,7 +221,7 @@ export default function RegisterForm() {
                             <Spinner />
                         ) : "Cadastrar"
                     }
-                </button>   
+                </button>
             </form>
         </div>
     )

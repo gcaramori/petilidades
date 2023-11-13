@@ -46,7 +46,7 @@ export default function Footer() {
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div className="block text-white">
                         <h3 className="text-lg xl:text-xl font-semibold mb-4">Siga-nos nas Redes Sociais</h3>
 
@@ -54,7 +54,7 @@ export default function Footer() {
                             <li>
                                 <Link href="https://facebook.com" className="text-sm xl:text-md block relative transition-all hover:text-gray-400">
                                     Facebook
-                                </Link> 
+                                </Link>
                             </li>
                             <li>
                                 <Link href="https://instagram.com" className="text-sm xl:text-md block relative transition-all hover:text-gray-400">

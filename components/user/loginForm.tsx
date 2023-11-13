@@ -33,17 +33,17 @@ export default function LoginForm({ openModal, setErrorMessage }: ILoginForm) {
     const login = async (loginData: FieldValues) => {
         const signInResponse = await signIn('credentials', { ...loginData, redirect: false })
 
-        if(signInResponse?.error) {
+        if (signInResponse?.error) {
             setErrorMessage(signInResponse?.error)
 
             openModal()
-            
+
             return
         }
 
         router.push('/')
     }
-    
+
     return (
         <div className="relative block w-full xl:w-[500px] h-auto xl:h-[650px] px-6 md:px-0">
             <div className="flex flex-col justify-start items-center relative gap-4 mb-14 xl:mb-24">
@@ -61,10 +61,10 @@ export default function LoginForm({ openModal, setErrorMessage }: ILoginForm) {
                     <label className="inline-block text-left text-black drop-shadow-sm text-sm font-bold mb-2">Email</label>
                     <input {...register('email')} className="block w-full h-10 bg-transparent border-b-2 border-black text-center text-lg focus:outline-none active:outline-none" placeholder="Ex: exemplo@gmail.com" />
                     {
-                        errors.email?.message && 
-                            <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
-                                {errors.email?.message?.toString()}
-                            </p>
+                        errors.email?.message &&
+                        <p className="block absolute top-20 inset-x-0 text-xs xl:text-md font-semibold text-red-600 text-left xl:text-center">
+                            {errors.email?.message?.toString()}
+                        </p>
                     }
                 </div>
 

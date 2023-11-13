@@ -32,25 +32,25 @@ function Navbar() {
 
   return (
     <header
-      className={`flex w-full py-2 lg:py-6 px-4 xl:px-10 bg-main ${inter.className}`}
+      className={`flex w-full py-2 lg:py-6 px-4 xl:px-32 bg-main ${inter.className}`}
     >
       {device === 'desktop' ? (
         <nav className="flex justify-around items-center w-full h-full">
-          <div className="headerLogo inline-block w-32 xl:w-[200px] 2xl:w-[250px] h-auto relative">
+          <div className="headerLogo inline-block w-32 xl:w-[200px] h-auto relative">
             <Image src={Logo} alt="logo" />
           </div>
 
           <ul className="flex justify-center items-center gap-8 w-auto xl:w-1/3 py-5 font-bold uppercase">
-            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-lg transition-all hover:text-gray-400">
+            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-md transition-all hover:text-gray-400">
               <Link href="/">Início</Link>
             </li>
-            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-lg transition-all hover:text-gray-400">
+            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-md transition-all hover:text-gray-400">
               <Link href="/cachorros">Cachorros</Link>
             </li>
-            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-lg transition-all hover:text-gray-400">
+            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-md transition-all hover:text-gray-400">
               <Link href="/gatos">Gatos</Link>
             </li>
-            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-lg transition-all hover:text-gray-400">
+            <li className="inline-block text-black text-xs xl:text-sm 2xl:text-md transition-all hover:text-gray-400">
               <Link href="/mais-vendidos">Mais vendidos</Link>
             </li>
           </ul>

@@ -1,4 +1,4 @@
-import * as z from "zod"
+import * as z from 'zod'
 
 export const addUserSchema = z.object({
   name: z.string(),
@@ -8,7 +8,7 @@ export const addUserSchema = z.object({
   gender: z.string(),
   cpf: z.string().min(8),
   telephone: z.string().min(10),
-  active: z.boolean()
+  active: z.boolean(),
 })
 
 export type User = z.infer<typeof addUserSchema>

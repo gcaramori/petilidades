@@ -10,6 +10,8 @@ module.exports = {
       colors: {
         main: '#F5F0F0',
         grayBorder: '#ABA6A6',
+        mainGreen: '#7bba79',
+        mainPink: '#fdc0cc',
       },
     },
   },

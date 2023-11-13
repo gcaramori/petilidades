@@ -28,9 +28,6 @@ dependencies:
   cookies-next:
     specifier: ^2.1.2
     version: 2.1.2
-  embla-carousel:
-    specifier: 8.0.0-rc14
-    version: 8.0.0-rc14
   eslint-config-next:
     specifier: 13.3.2
     version: 13.3.2(eslint@8.39.0)(typescript@5.0.4)
@@ -73,6 +70,9 @@ dependencies:
   react-input-mask:
     specifier: ^2.0.4
     version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
+  swiper:
+    specifier: ^11.0.3
+    version: 11.0.3
   swr:
     specifier: ^2.1.5
     version: 2.1.5(react@18.2.0)
@@ -1391,10 +1391,6 @@ packages:
 
   /electron-to-chromium@1.4.377:
     resolution: {integrity: sha512-H3BYG6DW5Z+l0xcfXaicJGxrpA4kMlCxnN71+iNX+dBLkRMOdVJqFJiAmbNZZKA1zISpRg17JR03qGifXNsJtw==}
-    dev: false
-
-  /embla-carousel@8.0.0-rc14:
-    resolution: {integrity: sha512-/NLkMFZ7xKryRVYeUjmhbfV63Vr07saPBDwAX2TPMbcaiWwfQfU5Xsc2AiCMZANtwmzsjRK6gSBa7hOy/VXu6g==}
     dev: false
 
   /emoji-regex@9.2.2:
@@ -3305,6 +3301,11 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  /swiper@11.0.3:
+    resolution: {integrity: sha512-MyV9ooQsriAe2EibeamqewLjgCfSvl2xoyratl6S3ln5BXDL4BzlO6mxcbLMCzQL6Z60b/u0AS/nKrepL0+TAg==}
+    engines: {node: '>= 4.7.0'}
+    dev: false
 
   /swr@2.1.5(react@18.2.0):
     resolution: {integrity: sha512-/OhfZMcEpuz77KavXST5q6XE9nrOBOVcBLWjMT+oAE/kQHyE3PASrevXCtQDZ8aamntOfFkbVJp7Il9tNBQWrw==}

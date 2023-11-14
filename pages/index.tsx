@@ -1,4 +1,4 @@
-import { InferGetServerSidePropsType, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 import { Inter } from 'next/font/google'
@@ -6,6 +6,7 @@ import PageTransition from '@/components/shared/pageTransition'
 import ImagesSlider from '@/components/images_carousel/imagesCarousel'
 import ProductsSlider from '@/components/products_carousel/productsCarousel'
 import { BsArrowRight } from 'react-icons/bs'
+import { loadProducts } from '@/lib/loadProducts'
 
 type IndexPageRef = React.ForwardedRef<HTMLDivElement>
 
@@ -95,8 +96,7 @@ const productsMock = [
 ]
 
 export const getStaticProps = (async (context) => {
-  const products = await fetch('https://dummyjson.com/products')
-    .then(res => res.json())
+  const products = await loadProducts()
 
   return { props: products }
 }) satisfies GetStaticProps<{ products: IApiResponse }>

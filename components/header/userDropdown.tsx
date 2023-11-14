@@ -33,7 +33,7 @@ export default function UserDropdown() {
               className="block absolute left-[-50px] rounded-md drop-shadow-md w-auto h-auto transition-all whitespace-nowrap bg-gray-100 mt-2"
               onMouseLeave={handleUserButton}
             >
-              <ul className="block h-full w-full text-sm text-bold text-black">
+              <ul className="block h-full w-full text-sm font-semibold text-black">
                 <li className="block text-center h-auto w-auto transition-all bg-gray-100 hover:bg-gray-200">
                   <Link
                     className="block w-full h-full py-3 px-8 focus:outline-none focus:border-0"

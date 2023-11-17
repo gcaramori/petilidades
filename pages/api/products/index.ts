@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
-import { addUserSchema } from '@/schemas/addUserSchema'
-import { hash } from 'bcryptjs'
+import { addProductSchema } from '@/schemas/addProductSchema'
 
 const prisma = new PrismaClient()
 
@@ -13,38 +12,36 @@ export default async function handler(
 
     if (method === 'POST') {
         try {
-            const user = addUserSchema.parse(body)
+            const product = addProductSchema.parse(body)
 
-            user.password = await hash(user.password, 10)
-
-            const newUser = await prisma.user.create({
-                data: user
+            const newProduct = await prisma.products.create({
+                data: product
             })
 
-            res.status(200).json(newUser)
+            res.status(200).json(newProduct)
         }
         catch (error: any) {
             res.status(400).json({ error: error.message || "Erro ao criar usuário!" })
         }
     }
     else if (method === 'GET') {
-        const users = await prisma.user.findMany()
+        const products = await prisma.products.findMany()
 
-        res.status(200).json(users)
+        res.status(200).json(products)
     }
     else if (method === 'PUT') {
-        const { email, ...userData } = req.body
+        const { id, ...productData } = req.body
 
-        if (!email) {
-            res.status(400).json({ error: "Email não informado!" })
+        if (!id) {
+            res.status(400).json({ error: "Id não informado!" })
         }
 
         try {
-            const updatedUser = await prisma.user.update({
+            const updatedUser = await prisma.products.update({
                 where: {
-                    email: email
+                    id
                 },
-                data: userData
+                data: productData
             })
 
             res.status(200).json(updatedUser)

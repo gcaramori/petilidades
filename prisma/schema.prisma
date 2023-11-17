@@ -42,7 +42,7 @@ model Products {
   list_price Float
   boleto_price Float
   quantity Int
-  category String
+  categories String[]
   discount Int
   extra Json
   visits Int

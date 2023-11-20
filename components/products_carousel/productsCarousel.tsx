@@ -4,19 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-
-interface IProductSlider {
-  id: string
-  images: string[]
-  url: string
-  name: string
-  price?: string
-  list_price?: string
-  installment?: {
-    amount: string
-    value: string
-  }
-}
+import { IProductSlider } from '@/interfaces/IProductsSlider'
 
 export default function ProductsSlider({
   title,
@@ -40,7 +28,7 @@ export default function ProductsSlider({
         {products.map((product) => (
           <SwiperSlide key={product.id} id={product.id} className="pt-4 pb-6">
             <div className="product p-2 rounded-md border border-gray-200 bg-white transition-all hover:shadow-lg">
-              <Link href={product.url}>
+              <Link href={product.url} target="_blank">
                 <div className="product-image relative w-full block mb-3">
                   {product.images.map((image, index) => (
                     <Image
@@ -55,7 +43,7 @@ export default function ProductsSlider({
                 </div>
 
                 <div className="product-details p-2 flex flex-col justify-center items-center">
-                  <span className="product-name text-md font-bold text-black drop-shadow-sm">
+                  <span className="product-name text-md font-bold text-center text-black drop-shadow-sm mb-4">
                     {product.name}
                   </span>
                   <div className="product-prices flex justify-center items-center gap-3">
@@ -66,12 +54,9 @@ export default function ProductsSlider({
                       {product.list_price}
                     </span>
                   </div>
-                  {product.installment && (
-                    <span className="product-installments text-md text-black drop-shadow-sm">
-                      <strong>{product.installment?.amount}x</strong> de
-                      <strong>{product.installment.value}</strong>
-                    </span>
-                  )}
+                  <span className="product-installments text-md text-black drop-shadow-sm">
+                    <strong>10x</strong> de <strong>R$ 100,00</strong>
+                  </span>
                 </div>
               </Link>
             </div>

@@ -18,7 +18,7 @@ export default function HeaderSearch() {
       <input
         type="text"
         name="search"
-        className="py-2 px-6 w-full z-20 block rounded-full text-xs xl:text-sm font-semibold text-black bg-gray-100 border border-grayBorder"
+        className="py-2 px-6 w-full z-20 block rounded-full text-xs font-semibold text-black bg-gray-100 border border-grayBorder"
         placeholder="Busque por produtos..."
       />
     </div>

@@ -15,17 +15,31 @@ export default async function handler(
             const product = addProductSchema.parse(body)
 
             const newProduct = await prisma.products.create({
-                data: product
+                data: {
+                    name: product.name,
+                    description: product.description,
+                    sku: product.sku,
+                    categories: product.categories,
+                    visits: product.visits,
+                    createdAt: product.createdAt,
+                    variants: {
+                        create: product.variants
+                    }
+                }
             })
 
             res.status(200).json(newProduct)
         }
         catch (error: any) {
-            res.status(400).json({ error: error.message || "Erro ao criar usuário!" })
+            res.status(400).json({ error: error.message || "Erro ao criar produto!" })
         }
     }
     else if (method === 'GET') {
-        const products = await prisma.products.findMany()
+        const products = await prisma.products.findMany({
+            include: {
+                variants: true
+            }
+        })
 
         res.status(200).json(products)
     }

@@ -3,16 +3,12 @@ import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
-
-interface ISlide {
-  imagePath: string
-  CTA: React.ReactNode
-}
+import { IBannerImages } from "@/interfaces/IBannerImages"
 
 export default function ImagesSlider({
   slides,
 }: {
-  slides: ISlide[]
+  slides: IBannerImages[]
 }) {
   return (
     <div className="imageSlider relative block w-full">

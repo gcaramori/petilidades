@@ -4,56 +4,64 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String @unique
-  password String
-  birth DateTime
-  gender String
-  cpf String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  birth     DateTime
+  gender    String
+  cpf       String
   telephone String
-  active Boolean
+  active    Boolean
   createdAt DateTime @default(now())
 }
 
 model UserShipment {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  user_id String
-  street String
-  district String
-  cep String
-  city String
-  country String
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id    String
+  street     String
+  district   String
+  cep        String
+  city       String
+  country    String
   complement String
-  cpf String
-  createdAt DateTime @default(now())
+  cpf        String
+  createdAt  DateTime @default(now())
 }
 
 model Products {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  sku String @unique
-  images Json
-  price Float
-  list_price Float
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  sku         String     @unique
+  categories  String[]
+  variants    Variants[]
+  visits      Int
+  createdAt   DateTime   @default(now())
+}
+
+model Variants {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  attributes   Json
+  price        Float
+  list_price   Float
   boleto_price Float
-  quantity Int
-  categories String[]
-  discount Int
-  extra Json
-  visits Int
-  createdAt DateTime @default(now())
+  discount     Int
+  quantity     Int
+  images       String[]
+  product     Products @relation(fields: [productId], references: [id])
+  productId   String   @db.ObjectId
 }
 
 model Categories {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
   description String
-  keywords String[]
-  images Json
-  createdAt DateTime @default(now())
+  keywords    String[]
+  images      Json
+  createdAt   DateTime @default(now())
 }

@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'nayemdevs.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'ae01.alicdn.com'
+      }
     ],
   },
 }

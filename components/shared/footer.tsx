@@ -64,6 +64,10 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
+
+                <div className="flex justify-center items-center my-3">
+                    <p></p>
+                </div>
             </div>
         </footer>
     )

@@ -15,7 +15,8 @@ export const authOptions: NextAuthOptions = {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
-        }).then(res => res.json())
+        })
+          .then(res => res.json())
 
         if (user.message) {
           throw new Error(user.message)

@@ -41,7 +41,7 @@ export default function LoginForm({ openModal, setErrorMessage }: ILoginForm) {
             return
         }
 
-        router.push('/')
+        // router.push('/')
     }
 
     return (

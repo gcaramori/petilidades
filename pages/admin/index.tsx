@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import PageTransition from '@/components/shared/pageTransition'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]'
-import { IUserSession } from '@/interfaces/IUserSession'
+import { Session } from 'next-auth'
 
 type IndexPageRef = React.ForwardedRef<HTMLDivElement>
 
@@ -18,17 +18,17 @@ export const getServerSideProps = (async (context) => {
       session
     }
   }
-}) satisfies GetServerSideProps<{session: IUserSession}>
+}) satisfies GetServerSideProps<{ session: Session | null }>
 
-function Admin(props: { session: IUserSession }, ref: IndexPageRef) {
+function Admin(props: { session: Session }, ref: IndexPageRef) {
   console.log(props)
-  
+
   return (
     <PageTransition ref={ref}>
       <main
         className={`flex h-full flex-col items-center justify-between ${inter.className} overflow-hidden`}
       >
-        
+
       </main>
     </PageTransition>
   )

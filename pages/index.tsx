@@ -12,7 +12,6 @@ type IndexPageRef = React.ForwardedRef<HTMLDivElement>
 
 const inter = Inter({ subsets: ['latin'] })
 
-
 export const getStaticProps = (async (context) => {
   const products = await loadProductsForSlider()
 

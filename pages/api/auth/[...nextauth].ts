@@ -11,18 +11,14 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const user = await fetch(`${process.env.API_URL}/api/users/signin`, {
+        const user = await fetch(`${process.env.API_URL}/users/signin`, {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
         }).then(res => res.json())
 
-        if (!user) {
-          throw new Error("Usuário e/ou senha incorretos!")
-        }
-
-        if (!user?.active) {
-          throw new Error("Usuário não está ativo!")
+        if (user.message) {
+          throw new Error(user.message)
         }
 
         return user

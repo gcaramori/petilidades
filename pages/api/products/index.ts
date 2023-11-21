@@ -43,27 +43,6 @@ export default async function handler(
 
         res.status(200).json(products)
     }
-    else if (method === 'PUT') {
-        const { id, ...productData } = req.body
-
-        if (!id) {
-            res.status(400).json({ error: "Id não informado!" })
-        }
-
-        try {
-            const updatedUser = await prisma.products.update({
-                where: {
-                    id
-                },
-                data: productData
-            })
-
-            res.status(200).json(updatedUser)
-        }
-        catch (error: any) {
-            res.status(400).json({ error: error.message || "Erro ao atualizar usuário!" })
-        }
-    }
     else {
         res.status(500).json({ error: "Rota não encontrada!" })
     }

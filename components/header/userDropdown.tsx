@@ -18,7 +18,7 @@ export default function UserDropdown() {
       <div className="relative block w-auto">
         <button
           type="button"
-          className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-10 focus:border-black active:border-black hover:border-black"
+          className="flex justify-center items-center text-sm h-10 w-10 rounded-full border border-grayBorder transition-all relative z-50 focus:border-black active:border-black hover:border-black"
           onMouseEnter={handleUserButton}
         >
           <BsFillPersonFill size="0.9rem" />
@@ -30,7 +30,7 @@ export default function UserDropdown() {
             animate={{ opacity: 1, y: 0 }}
           >
             <div
-              className="block absolute left-[-50px] rounded-md drop-shadow-md w-auto h-auto transition-all whitespace-nowrap bg-gray-100 mt-2"
+              className="block absolute left-[-50px] rounded-md drop-shadow-md w-auto h-auto z-50 transition-all whitespace-nowrap bg-gray-100 mt-2"
               onMouseLeave={handleUserButton}
             >
               <ul className="block h-full w-full text-sm font-semibold text-black">
@@ -52,7 +52,7 @@ export default function UserDropdown() {
                 </li>
                 <li className="block text-center h-auto w-auto transition-all bg-gray-100 hover:bg-gray-200">
                   <button
-                    className="block w-full h-full py-3 px-8 border-0 appearance-none z-50 focus:outline-none focus:border-0"
+                    className="block w-full h-full py-3 px-8 border-0 appearance-none focus:outline-none focus:border-0"
                     onClick={() => signOut()}
                   >
                     Sair

@@ -11,7 +11,7 @@ interface ILoginForm {
     openModal: () => void
     setErrorMessage: (errorMessage: string) => void
 }
-
+z
 const loginSchema = z.object({
     email: z.string().min(8, { message: 'Digite o email, por favor!' }),
     password: z.string().min(1)

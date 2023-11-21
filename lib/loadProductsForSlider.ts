@@ -3,8 +3,6 @@ import { IProduct } from "@/interfaces/IProduct"
 export const loadProductsForSlider = async () => {
     const productsResponse = await fetch(`${process.env.API_URL}/products`)
         .then(res => res.json())
-    
-    console.log('products response: ', productsResponse);
         
     const products = productsResponse.map((product: IProduct) => {
         return {
